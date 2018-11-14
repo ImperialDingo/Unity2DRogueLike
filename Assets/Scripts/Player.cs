@@ -94,6 +94,7 @@ private void OnDisable()
 	private void Restart()
 	{
 		Application.LoadLevel(Application.loadedLevel);
+		// SceneManager.LoadScene(SceeneManager.loadedScene);
 	}
 
 	public void LoseFood(int loss)
