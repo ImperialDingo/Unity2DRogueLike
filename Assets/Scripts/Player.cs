@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MovingObject 
 {
@@ -10,7 +11,10 @@ public class Player : MovingObject
 	public float restartLevelDelay = 1f;
 
 	private Animator animator;
-	private int food;
+	public int food;
+
+	public int horizontal;
+	public int vertical;
 
 
 
@@ -32,13 +36,16 @@ private void OnDisable()
 	{
 		if(!GameManager.instance.playersTurn) return;
 
-		int horizontal = 0;
-		int vertical = 0;
+		 horizontal = 0;
+		 vertical = 0;
 
 		horizontal = (int) Input.GetAxisRaw("Horizontal");
 		vertical = (int) Input.GetAxisRaw("Vertical");
 
-		if(horizontal !=0) vertical = 0;
+		if(horizontal !=0) 
+		{
+			vertical = 0;
+		}
 
 		if(horizontal != 0 || vertical != 0)
 		{
@@ -93,7 +100,7 @@ private void OnDisable()
 
 	private void Restart()
 	{
-		Application.LoadLevel(Application.loadedLevel);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
 		// SceneManager.LoadScene(SceeneManager.loadedScene);
 	}
 
