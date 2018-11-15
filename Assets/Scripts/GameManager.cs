@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 	public int playerFoodPoints = 100;
 	[HideInInspector] public bool playersTurn = true;
 
-	private int level = 3; 
+	private int level = 1; 
 	private List<Enemy> enemies;
 	private bool enemiesMoving;
 
