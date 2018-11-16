@@ -17,6 +17,15 @@ public class Player : MovingObject
 	public int horizontal;
 	public int vertical;
 
+	//Sounds
+	public AudioClip moveSound1;
+	public AudioClip moveSound2;
+	public AudioClip eatSound1;
+	public AudioClip eatSound2;
+	public AudioClip drinkSound1;
+	public AudioClip drinkSound2;
+	public AudioClip gameOverSound;
+
 
 
 	// Use this for initialization
@@ -65,7 +74,7 @@ private void OnDisable()
 
 		if(Move(xDir, yDir, out hit))
 		{
-
+			SoundManager.instance.RandomizeSfx(moveSound1, moveSound2);
 		}
 
 		CheckIfGameOver();
@@ -85,12 +94,14 @@ private void OnDisable()
 		{
 			food += pointsPerFood;
 			foodText.text = "+" + pointsPerFood + " Food: " + food;
+			SoundManager.instance.RandomizeSfx(eatSound1, eatSound2);
 			other.gameObject.SetActive(false);
 		}
 		else if(other.tag == "Soda")
 		{
 			food += pointsPerSoda;
 			foodText.text = "+" + pointsPerSoda + " Food: " + food;
+			SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
 			other.gameObject.SetActive(false);
 		}
 
@@ -120,6 +131,8 @@ private void OnDisable()
 	{
 		if(food <= 0)
 		{
+			SoundManager.instance.PlaySingle(gameOverSound);
+			SoundManager.instance.musicSource.Stop();
 			GameManager.instance.GameOver();
 		}
 	}
